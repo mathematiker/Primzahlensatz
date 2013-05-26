@@ -1,7 +1,7 @@
 \documentclass{mywork}
 \addtolength{\headheight}{\baselineskip}
 \lhead{Proseminar - Funktionentheorie \\ \today}
-\chead{Newtons Beweis des Primzahlensatzes}
+\chead{Newmans Beweis des Primzahlensatzes}
 \rhead{\theauthor}
 \renewcommand{\theta}{\vartheta}
 \cfoot[LE,RO]{\bfseries\color{gray} -~\thepage~-}
@@ -155,7 +155,7 @@ Schließlich folgt $ \pi(x) \sim \frac{x}{\ln x} \iff \theta(x) \sim x $.
 \end{proof}
 
 \begin{lem} \label{hol}
-$ \zeta(z)\neq 0 $ für $ \Re(z) \ge 1 $ und $ \Phi(z)-\frac{1}{z-1} $ ist holomorph fortsetzbar auf einer Obermenge von $ \{z\in \C| \Re(z)\ge 1\} $
+$ \zeta(z)\neq 0 $ für $ \Re(z) \ge 1 $ und $ \Phi(z)-\frac{1}{z-1} $ ist holomorph fortsetzbar auf einer Obermenge von $ \{z\in \C| \Re(z)\ge 1\} $.
 \end{lem}
 
 \begin{proof}
@@ -246,11 +246,11 @@ Und damit folgt schließlich auch
 \[
 \lim_{\eps\to 0+} \eps \Phi(1+\eps-i\alpha)= \lim_{\eps\to 0+}- \eps \overline{\frac{\zeta'(z_1)}{\zeta(z_1)}}  =-\mu \text{ und } \lim_{\eps\to 0+} \eps \Phi(1+\eps-2i\alpha)=-\nu.
 \]
-Wir betrachten nun
+Wir betrachten nun für $ \eps>0 $
 \begin{align*}
-\sum_{r=-2}^2 \begin{pmatrix} 4 \\ 2+r \end{pmatrix} \Phi(1+\eps+ir\alpha)&=\sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \sum_{r=-2}^2 \begin{pmatrix} 4 \\ 2+r \end{pmatrix} p^{-ir\alpha} \\ 
-&= \sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \sum_{r=0}^4 \begin{pmatrix} 4 \\ r \end{pmatrix} \Big(p^{-i\frac{\alpha}{2}}\Big)^r \Big ( p^{i\frac \alpha 2}\Big )^{4-r}\\
-&= \sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \Big(\underbrace{p^{-i\frac\alpha 2} + p^{i \frac \alpha 2}}_{=2\Re\Big(p^{i \frac \alpha 2}\Big)}\Big)^4\ge 0.
+\sum_{r=-2}^2 \begin{pmatrix} 4 \\ 2+r \end{pmatrix} \eps \Phi(1+\eps+ir\alpha)&=\eps \sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \sum_{r=-2}^2 \begin{pmatrix} 4 \\ 2+r \end{pmatrix} p^{-ir\alpha} \\ 
+&= \eps \sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \sum_{r=0}^4 \begin{pmatrix} 4 \\ r \end{pmatrix} \Big(p^{-i\frac{\alpha}{2}}\Big)^r \Big ( p^{i\frac \alpha 2}\Big )^{4-r}\\
+&= \eps \sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \Big(\underbrace{p^{-i\frac\alpha 2} + p^{i \frac \alpha 2}}_{=2\Re\Big(p^{i \frac \alpha 2}\Big)}\Big)^4\ge 0.
 \end{align*}
 Gehen wir zum Grenzwert $ \eps \to 0+ $ über, so erhalten wir die Ungleichung
 \[
@@ -260,7 +260,7 @@ und es folgt $ \mu=0 $.
 \end{enumerate}
 \end{proof}
 \begin{st}[Analytisches Argument] \label{ana}
-Sei $ f:[0, \infty) \to \R $ beschränkt und messbar. Weiter sei $ g:\{z\in \C|\Re z >0\} \to \C, z \mapsto \int_{0}^\infty f(t) e^{-zt}\dx[t] $ holomorph. Zudem gebe es eine holomorphe Fortsetzung von $ g $ auf einer offene Obermenge von $ \{z \in \C| \Re(z) \ge 0\} $. Dann existiert $ \lim_{T\to \infty} \int_0^T f(t) \dx[t] $, und der Grenzwert hat den Wert $ g(0) $
+Sei $ f:[0, \infty) \to \R $ beschränkt und messbar. Weiter sei $ g:\{z\in \C|\Re z >0\} \to \C, z \mapsto \int_{0}^\infty f(t) e^{-zt}\dx[t] $ holomorph. Zudem gebe es eine holomorphe Fortsetzung von $ g $ auf einer offene Obermenge von $ \{z \in \C| \Re(z) \ge 0\} $. Dann existiert $ \lim_{T\to \infty} \int_0^T f(t) \dx[t] $, und der Grenzwert hat den Wert $ g(0) $.
 \end{st}
 \begin{proof}
 Für $ T>0 $ setzen wir $ g_T: \C \to \C $ als $ g_T(z):= \int_{0}^T f(t) e^{-zt}\dx[t] $. Wegen der Beschränktheit und Messbarkeit von $ f $ ist $ g_T $ wohldefiniert. $ g_T $ ist eine ganze Funktion, denn betrachten wir den Differentialquotienten
@@ -268,10 +268,11 @@ Für $ T>0 $ setzen wir $ g_T: \C \to \C $ als $ g_T(z):= \int_{0}^T f(t) e^{-zt
 \Big | \frac{g_T(z+h)-g_T(z)}{h}+ \int_0^T t f(t) e^{-zt}\dx[t]\Big |\le \int_0^T |f(t) e^{-zt}| \Big | \frac{e^{-ht}-1+ht}h \Big | \dx[t].
 \]
 Setze $ F(x):= e^{-zht} $. Es ist
-\[
-\Big | \frac{e^{-ht}-1+ht}h \Big | \le \int_0^1 \int_0^x |ht^2 e^{-yht}|\dx[y]\dx\le |h|T^2 e^{|h| T} \frac{T^2}{2}\stackrel{h\to 0}\to 0.
-\]
-Und damit folgt die Holomorphität von $ g_T $ auf ganz $ \C $. Sei $ R>0 $ beliebig und $ C $ der orientierte Rand des konvexen (insbesondere einfach zusammenhängenden) berandeten Gebiets $ \{z  \in \C | \Re(z) \ge - \delta\} $, wobei $ \delta>0 $ derart gewählt ist, dass $ g $ holomorph im berandeten Gebiet ist. Es folgt leicht mittels Anwendung von Heine-Borel auf der Strecke $ \overline{-Ri, Ri} $, dass wir ein $ \delta:=\delta(R)>0 $ finden, sodass $ g $ auf $ \{ z \in \C | \Re(z) > - 2 \delta\} $ holomorph ist. Betrachte hierfür eine offene Überdeckung von $ \overline{-Ri, Ri} $ aus offenen Quadraten der Form $ \{z\in \C| |\Re(z-x)|<\delta \text{ und } |\Im(z-x)|<\delta_x\} $ auf denen $ g $ holomorph ist. Dann findet sich eine endliche Teilüberdeckung $ \{Q_1,..., Q_N\} $ und sei $ a $ die kleinsten Seitenlänge  aus unserer endlichen Teilüberdeckung, dann wähle $ \delta:= \frac{a}{4} $.
+\begin{align*}
+e^{-ht}-1+ht &= F(1)-F(0)-F'(0)=\int_0^1 [F'(x)-F'(0)]\dx= \int_0^1 \int_0^x F''(y)\dx[y] \dx\\
+\Big | \frac{e^{-ht}-1+ht}h \Big | &\le \int_0^1 \int_0^x |ht^2 e^{-yht}|\dx[y]\dx\le |h|T^2 e^{|h| T} \frac{T^2}{2}\stackrel{h\to 0}\to 0.
+\end{align*}
+Und damit folgt die Holomorphie von $ g_T $ auf ganz $ \C $. Sei $ R>0 $ beliebig und $ C $ der orientierte Rand des konvexen (insbesondere einfach zusammenhängenden) berandeten Gebiets $ \{z  \in \C | |z|\le R, \Re(z) \ge - \delta\} $, wobei $ \delta>0 $ derart gewählt ist, dass $ g $ holomorph im berandeten Gebiet ist. Es folgt leicht mittels Anwendung von Heine-Borel auf der Strecke $ \overline{-Ri, Ri} $, dass wir ein $ \delta:=\delta(R)>0 $ finden, sodass $ g $ auf $ \{ z \in \C | |z|\le R, \Re(z) > - 2 \delta\} $ holomorph ist. Betrachte hierfür eine offene Überdeckung von $ \overline{-Ri, Ri} $ aus offenen Quadraten der Form $ \{z\in \C| |\Re(z-x)|<\delta \text{ und } |\Im(z-x)|<\delta_x\} $ auf denen $ g $ holomorph ist. Dann findet sich eine endliche Teilüberdeckung $ \{Q_1,..., Q_N\} $ und sei $ a $ die kleinsten Seitenlänge  aus unserer endlichen Teilüberdeckung, dann wähle $ \delta:= \frac{a}{4} $.
 
 Setze $ G(z):=(g(z)-g_T(z))e^{zT} (1+ \frac{z^2}{R^2}) $. Mit der Cauchyschen Integralformel folgt
 \[
@@ -283,7 +284,7 @@ C_+:= C \cap \{z\in \C| \Re(z)>0\} \text{ und } C_-:= C\cap \{z\in \C|\Re(z)<0\}
 \]
 auf. Es ist
 \begin{align*}
-|g(0)-g_T(0)|\le \Bigg|\frac{1}{2\pi i} \int_{C_+} (g(z)&-g_T(z)) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z}\Bigg|\\ &+ \Bigg| \frac{1}{2\pi i} \int_{C_-} g(z) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z} \Bigg|+ \Bigg| \frac{1}{2\pi i} \int_{C_-} (g(z)-g_T(z)) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z} \Bigg|.
+|g(0)-g_T(0)|\le \Bigg|\frac{1}{2\pi i} \int_{C_+} (g(z)&-g_T(z)) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z}\Bigg|\\ &+ \Bigg| \frac{1}{2\pi i} \int_{C_-} g(z) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z} \Bigg|+ \Bigg| \frac{1}{2\pi i} \int_{C_-} g_T(z) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z} \Bigg|.
 \end{align*}
 Setze $ B:=\sup\{|f(t)|\, | t\ge 0\} $. Es folgt für den Integrationsweg $ C_+ $
 \[
@@ -307,7 +308,7 @@ Für $ C_- $ betrachten wir die Integrale für $ g $ und $ g_T $ seperat. Sei $ 
  \]
 Schließlich,
 \[
-\Bigg | \frac{1}{2\pi i} \int_{\tilde C_-} (g(z)-g_T(z))e^{zT} (1+\frac{z^2}{R^2}) \frac{\dx[z]}{z}\Bigg| \le ...\frac{B}{R}.
+\Bigg | \frac{1}{2\pi i} \int_{\tilde C_-} (g(z)-g_T(z))e^{zT} (1+\frac{z^2}{R^2}) \frac{\dx[z]}{z}\Bigg| \le ... \le \frac{B}{R}.
 \]
 Wir können also $ R $ so groß wählen, dass $ \frac{B}{R}< \frac{\eps}{4} $. Das verbleibende Integral wird für genügend kleines $ t $ und dazu passend hinreichend große $T$ beliebig klein. Um dies zu zeigen, wählen wir $ 0<t\le \delta $ beliebig. Setze $ S:=\sup\{|g(z)|\Big|1+\frac{z^2}{R^2}\Big|\frac{1}{|z|}, z \in C_-\} $. Dann folgt mit hinreichend großem $ T $
 \begin{align*}
@@ -328,8 +329,8 @@ $ \int_1^\infty \frac{\theta(x)-x}{x^2}\dx $ existiert.
 Für $ \Re(z)>1 $ folgt mit partieller Summation
 \begin{align*}
 \Phi(z)&=\sum_{p\in \P} \frac{\ln p}{p^z}= \lim_{x\to \infty} \sum_{p\in \P, \, p\le x} \frac{\ln p}{p^z}\\
- &= \lim_{x\to \infty} \underbrace{\frac{\theta(x)}{x^z}}_{\stackrel{\text{Lem. \ref{linear}}}\to 0}+ z \int_{2}^\infty \frac{\theta}{x^{z+1}} \dx \\
- &=s \int_{1}^\infty \frac{\theta(x)}{x^{s+1}}\dx \stackrel{x=e^t}= s \int_0^\infty e^{-st} \theta(e^t) \dx[t].
+ &= \lim_{x\to \infty} \underbrace{\frac{\theta(x)}{x^z}}_{\stackrel{\text{Lem. \ref{linear}}}\to 0}+ z \int_{2}^\infty \frac{\theta(x)}{x^{z+1}} \dx \\
+ &=z \int_{1}^\infty \frac{\theta(x)}{x^{z+1}}\dx \stackrel{x=e^t}= z \int_0^\infty e^{-zt} \theta(e^t) \dx[t].
 \end{align*}
 Sei $ f(t):= \theta(e^t) e^{-t} -1  $. $ f $ ist nach Lemma \ref{linear} beschränkt und messbar.
 Vermöge 
