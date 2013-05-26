@@ -1,21 +1,21 @@
 \documentclass{mywork}
 \addtolength{\headheight}{\baselineskip}
 \lhead{Proseminar - Funktionentheorie \\ \today}
-\chead{Newmans Beweis des Primzahlensatzes}
+\chead{Newmans Beweis des Primzahlsatzes}
 \rhead{\theauthor}
 \renewcommand{\theta}{\vartheta}
 \cfoot[LE,RO]{\bfseries\color{gray} -~\thepage~-}
 \usepackage{pgfplots}
 \begin{document}
-\section*{Der Primzahlensatz}
+\section*{Der Primzahlsatz}
 Zunächst einige Definitionen. Es sei angemerkt, dass $ p $ stets Element aus der Menge aller Primzahlen sein soll.
 
 \begin{df}[Primzahlen zählende Funktion]
-Sei $ x\in \R $, dann definieren wir die \emph{Primzahlen zählende Funktion} durch
+Sei $ x\in \R $. Dann definieren wir die \emph{Primzahlen zählende Funktion} durch
 \[
 \pi(x):=\Big|\{p\in \mathbb P| p \le x\}\Big|=\sum_{p \in \mathbb P,\; p \le x} 1,
 \]
-wobei $ \mathbb P $ die Menge aller Primzahlen bezeichnet.
+wobei $ \mathbb P $ die Menge aller Primzahlen bezeichne.
 \end{df} 
 \begin{figure}[H]
 	\centering
@@ -36,8 +36,8 @@ Sei $ f,g: \R\to \R $, dann sagen wir:
 \end{itemize}
 \end{df}
 
-Nun widmen wir uns dem Primzahlensatz.
-\begin{st}[Primzahlensatz]
+Nun widmen wir uns dem Primzahlsatz.
+\begin{st}[Primzahlsatz]
 $ \pi(x)\sim \frac{x}{\ln x} $
 \end{st}
 \begin{figure}[H]
@@ -49,7 +49,7 @@ $ \pi(x)\sim \frac{x}{\ln x} $
 	\label{fig:quotient}
 \end{figure}
 
-Für den Beweis der Aussage brauchen wir zunächst einige Hilfssätze. Zunächst zeigen, wir, dass die Riemannsche Zetafunktion keine Nullstellen für $ \Re(z)\ge 1 $ haben kann und folgern schließlich mit Hilfe eines analytischen Arguments den Primzahlensatz.
+Für den Beweis der Aussage brauchen wir zunächst einige Hilfssätze. Zunächst zeigen, wir, dass die Riemannsche Zetafunktion keine Nullstellen für $ \Re(z)\ge 1 $ haben kann und folgern schließlich mit Hilfe eines analytischen Arguments den Primzahlsatz.
 
 Wir definieren uns an dieser Stelle die drei Funktionen, die wir im Verlauf des Beweises benötigen. Vermöge
 \begin{alignat*}{2}
@@ -59,12 +59,12 @@ Wir definieren uns an dieser Stelle die drei Funktionen, die wir im Verlauf des 
 \end{alignat*}
 
 \begin{lem}[Fortsetzung der Riemannschen Zetafunktion]\label{pol}
-Die \emph{Riemannsche $ \zeta $-Funktion} ist holomorph fortsetzbar auf $ \{z\in \C| \Re(z)>0\} \setminus\{1\} $ und besitzt bei $ z=1 $ eine einfache Polstelle.
+Die \emph{Riemannsche $ \zeta $-Funktion} ist holomorph fortsetzbar auf $ \C \setminus\{1\} $ und besitzt bei $ z=1 $ eine einfache Polstelle.
 \end{lem}
-\begin{proof}[Übung]
+\begin{proof}[letztes Seminar]
 \end{proof}
-\begin{lem}[Residuum an der Stelle $ x=1 $]
-$ \Res(\zeta, 1)=1 $. Insbesondere ist die Funktion $ \zeta(z)-\frac{1}{z-1} $ holomorph Fortsetzbar auf $ \{z \in \C | \Re(z)>0\} $.
+\begin{lem}[Residuum an der Stelle $ z=1 $]
+$ \Res(\zeta, 1)=1 $. Insbesondere kann die Funktion $ \zeta(z)-\frac{1}{z-1} $ auf ganz $ \C $ holomorph fortgesetzt werden.
 \end{lem}
 \begin{proof}
 mit dem Cauchy-Integralkriterium für Reihen folgt für $ x>1 $.
@@ -124,7 +124,7 @@ Für alle $ x\ge 1 $ können wir $m$ derart wählen, dass $ 2^{m-1} \le x < 2^m 
 Für $ x\le 1 $ ist $ \theta(x)=0 $ und damit folgt insgesamt $ \theta(x)=\mathcal O(x) $.
 \end{proof}
 
-\begin{lem}[Äquivalente Bedingung des Primzahlensatzes] \label{equiv}
+\begin{lem}[äquivalente Fassung des Primzahlsatzes] \label{equiv}
 $ \theta(x) \sim x \iff \pi(x) \sim \frac{x}{\ln x} $.
 \end{lem}
 \begin{proof}
@@ -194,7 +194,7 @@ Sei $ \Re(z) \ge \frac{1}{2} + \delta $ für $ \delta>0 $ beliebig. Für hinreic
 \Big | \frac{\ln p}{p^z(p^z-1)}\Big | \le \frac{p^{\delta}}{p^{1/2+\delta}\cdot \frac{1}{2} p^{1/2+\delta}}= 2 \frac{1}{p^{1+\delta}}.
 \] % Hier würde ich einen Zwischenschritt machen bei der ersten Ungleichung
 
-Es folgt die kompakten und absoluten Konvergenz (s.o.) von $ \sum_{p\in \P} \frac{\ln p}{p^z(p^z-1)} $ für $ \Re(z)>\frac{1}{2} $. Damit folgt, dass $ H(z) $ wohldefiniert und holomorph ist. Insbesondere haben wir eine meromorphe Fortsetzung $ \Phi(z) = -\frac{\zeta'(z)}{\zeta(z)} - H(z)$ gefunden, wobei die Singularitäten gerade bei den Null- und Polstellen von $ \zeta(z) $ liegen (Die Nullstellen einer von 0 verscheidenen Funktion innehrhalb eines Gebiets sind isoliert). 
+Es folgt die kompakten und absoluten Konvergenz (s.o.) von $ \sum_{p\in \P} \frac{\ln p}{p^z(p^z-1)} $ für $ \Re(z)>\frac{1}{2} $. Damit folgt, dass $ H(z) $ wohldefiniert und holomorph ist. Insbesondere haben wir eine meromorphe Fortsetzung $ \Phi(z) = -\frac{\zeta'(z)}{\zeta(z)} - H(z)$ gefunden, wobei die Singularitäten gerade bei den Null- und Polstellen von $ \zeta(z) $ liegen (Die Nullstellen einer von 0 verscheidenen Funktion innerhalb eines Gebiets sind isoliert). 
 
 Wir zeigen nun die Holomorphie von $ \Phi(z)-\frac{1}{z-1} $ im Punkt $ z=1 $ (die einzige Polstelle von $ \zeta $). Nach Lemma \ref{pol} folgt, dass es holomorphe Funktionen $ H_1, H_2 $ gibt mit 
 \[
@@ -358,7 +358,7 @@ Und nach dem Cauchy-Kriterium divergiert das Integral $ \int_1^\infty \frac{\the
 \]
 Es folgt $ \lim\inf_{x\to \infty} \frac{\theta(x)}{x} \ge 1 $. Insgesamt folgt $ \lim_{x\to \infty} \frac{\theta(x)}{x} =1 $.
 \end{proof}
-Mit Lemma \ref{final} und Lemma \ref{equiv} folgt der Primzahlensatz.
+Mit Lemma \ref{final} und Lemma \ref{equiv} folgt der Primzahlsatz.
 \newpage
 \section*{Verwendete Sätze}
 An dieser Stelle, die Formulierung einiger wichtiger Sätze. Sei stets $ \K \in \{\R, \C\} $.
