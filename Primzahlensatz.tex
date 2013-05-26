@@ -51,7 +51,7 @@ $ \pi(x)\sim \frac{x}{\ln x} $
 
 Für den Beweis der Aussage brauchen wir zunächst einige Hilfssätze. Zunächst zeigen, wir, dass die Riemannsche Zetafunktion keine Nullstellen für $ \Re(z)\ge 1 $ haben kann und folgern schließlich mit Hilfe eines analytischen Arguments den Primzahlsatz.
 
-Wir definieren uns an dieser Stelle die drei Funktionen, die wir im Verlauf des Beweises benötigen. Vermöge
+Wir definieren uns an dieser Stelle die drei Funktionen, die wir im Verlauf des Beweises benötigen.
 \begin{alignat*}{2}
 \zeta(z)&:=\sum_{n\in \N} \frac{1}{n^z},&\qquad &z \in \C \text{ und } \Re(z)>1; \\
 \theta(x)&:=\sum_{p\in \mathbb P, \; p\le x} \ln p,&\qquad &x\in \R; \\
@@ -69,7 +69,7 @@ $ \Res(\zeta, 1)=1 $. Insbesondere kann die Funktion $ \zeta(z)-\frac{1}{z-1} $ 
 \begin{proof}
 mit dem Cauchy-Integralkriterium für Reihen folgt für $ x>1 $.
 \[
- \frac{1}{x-1}=\int_{1}^\infty \frac{1}{t^x} \, \mathrm dt \le \underbrace{\sum_{n=1}^\infty \frac{1}{n^x}}_{\zeta(x)} \le 1+\int_{1}^\infty \frac{1}{t^x} \,\mathrm dt = 1+ \frac{1}{x-1}.
+ \frac{1}{x-1}=\int_{1}^\infty \frac{1}{t^x} \, \mathrm dt \le \underbrace{\sum_{n=1}^\infty \frac{1}{n^x}}_{=\zeta(x)} \le 1+\int_{1}^\infty \frac{1}{t^x} \,\mathrm dt = 1+ \frac{1}{x-1}.
 \]
 Daraus folgt
 \[
@@ -244,7 +244,7 @@ Es ist für $ \Re(z)>1 $
 \] 
 Und damit folgt schließlich auch
 \[
-\lim_{\eps\to 0+} \eps \Phi(1+\eps-i\alpha)= \lim_{\eps\to 0+}- \eps \overline{\frac{\zeta'(z_1)}{\zeta(z_1)}}  =-\mu \text{ und } \lim_{\eps\to 0+} \eps \Phi(1+\eps-2i\alpha)=-\nu.
+\lim_{\eps\to 0+} \eps \Phi(1+\eps-i\alpha)= \lim_{\eps\to 0+}- \eps \overline{\frac{\zeta'(1+\eps+i\alpha)}{\zeta(1+\eps+i\alpha)}}  =-\mu \text{ und } \lim_{\eps\to 0+} \eps \Phi(1+\eps-2i\alpha)=-\nu.
 \]
 Wir betrachten nun für $ \eps>0 $
 \begin{align*}
@@ -359,66 +359,66 @@ Und nach dem Cauchy-Kriterium divergiert das Integral $ \int_1^\infty \frac{\the
 Es folgt $ \lim\inf_{x\to \infty} \frac{\theta(x)}{x} \ge 1 $. Insgesamt folgt $ \lim_{x\to \infty} \frac{\theta(x)}{x} =1 $.
 \end{proof}
 Mit Lemma \ref{final} und Lemma \ref{equiv} folgt der Primzahlsatz.
-\newpage
-\section*{Verwendete Sätze}
-An dieser Stelle, die Formulierung einiger wichtiger Sätze. Sei stets $ \K \in \{\R, \C\} $.
+% \newpage
+% \section*{Verwendete Sätze}
+% An dieser Stelle, die Formulierung einiger wichtiger Sätze. Sei stets $ \K \in \{\R, \C\} $.
 
-\begin{st*}[Cauchy-Integralkriterium]
-Es sei $ f $ eine monoton fallende Funktion, die auf dem Intervall $ [p, \infty) $ mit einer ganzen Zahl $ p $ definiert ist und nur positive Werte annimmt. Dann konvergiert die Reihe $ \sum_{n=p}^\infty f(n) $ genau dann, wenn das Integral $ \int_p^\infty f(x) \dx $ existiert. Es gelten die Abschätzungen
-\[
-\sum_{n=p+1}^\infty f(n) \le \int_p^\infty f(x) \dx \le \sum_{n=p}^\infty f(n).
-\]
-\end{st*}
+% \begin{st*}[Cauchy-Integralkriterium]
+% Es sei $ f $ eine monoton fallende Funktion, die auf dem Intervall $ [p, \infty) $ mit einer ganzen Zahl $ p $ definiert ist und nur positive Werte annimmt. Dann konvergiert die Reihe $ \sum_{n=p}^\infty f(n) $ genau dann, wenn das Integral $ \int_p^\infty f(x) \dx $ existiert. Es gelten die Abschätzungen
+% \[
+% \sum_{n=p+1}^\infty f(n) \le \int_p^\infty f(x) \dx \le \sum_{n=p}^\infty f(n).
+% \]
+% \end{st*}
 
-\begin{st*}[Residuumberechnung]
-Hat $ f $ in $ a $ eine Polstelle 1. Ordnung, gilt: 
-\[
-\Res_a(f)=\lim_{z\to a}(z-a) f(z)
-\]
-\end{st*}
+% \begin{st*}[Residuumberechnung]
+% Hat $ f $ in $ a $ eine Polstelle 1. Ordnung, gilt: 
+% \[
+% \Res_a(f)=\lim_{z\to a}(z-a) f(z)
+% \]
+% \end{st*}
 
-\begin{st*}[Binomischer Lehrsatz]
-Für alle $ x,y\in \K $ und für alle $ n\in \N $
-\[
-(x+y)^n= \sum_{k=0}^n \begin{pmatrix} n \\ k \end{pmatrix} x^{n-k} y^k,
-\]
-wobei $ \begin{psmallmatrix} n\\ k \end{psmallmatrix}= \frac{n!}{k! (n-k)!} $, der Binomialkoeffizient ist.
-\end{st*}
+% \begin{st*}[Binomischer Lehrsatz]
+% Für alle $ x,y\in \K $ und für alle $ n\in \N $
+% \[
+% (x+y)^n= \sum_{k=0}^n \begin{pmatrix} n \\ k \end{pmatrix} x^{n-k} y^k,
+% \]
+% wobei $ \begin{psmallmatrix} n\\ k \end{psmallmatrix}= \frac{n!}{k! (n-k)!} $, der Binomialkoeffizient ist.
+% \end{st*}
 
-\begin{st*}[Kompakte Konvergenz holomorpher Funktionen]
-Eine Folge von Funktionen $ (f_n), f_n: O \to \C $ heißt \emph{kompakt konvergent} gegen $ f $, falls für jede kompakte Teilmenge $ K\subset O $ die Funktion $ f_n|_K $ gleichmäßig gegen $ f|_K $ konvergiert. Ist  $ f_n $ holomorph und konvergiert $ f_n $ kompakt gegen $ f $, so ist $ f $ holomorph.
-\end{st*}
+% \begin{st*}[Kompakte Konvergenz holomorpher Funktionen]
+% Eine Folge von Funktionen $ (f_n), f_n: O \to \C $ heißt \emph{kompakt konvergent} gegen $ f $, falls für jede kompakte Teilmenge $ K\subset O $ die Funktion $ f_n|_K $ gleichmäßig gegen $ f|_K $ konvergiert. Ist  $ f_n $ holomorph und konvergiert $ f_n $ kompakt gegen $ f $, so ist $ f $ holomorph.
+% \end{st*}
 
-\begin{st*}[Weierstraßscher M-Test]
-Ist $ \sum_{a_n} $ mit $ a_n \ge 0 $ konvergent und gilt $ f_n: M \to \C, |f_n(z)|\le a_n $ auf $ M\subset \C $, so ist die Reihe $ \sum_{n=0}^\infty f_n(z) $ gleichmäßig konvergent auf $ M $ und absolut konvergent für $ z\in M $.
-\end{st*}
+% \begin{st*}[Weierstraßscher M-Test]
+% Ist $ \sum_{a_n} $ mit $ a_n \ge 0 $ konvergent und gilt $ f_n: M \to \C, |f_n(z)|\le a_n $ auf $ M\subset \C $, so ist die Reihe $ \sum_{n=0}^\infty f_n(z) $ gleichmäßig konvergent auf $ M $ und absolut konvergent für $ z\in M $.
+% \end{st*}
 
-\begin{st*}[Riemannscher Hebbarkeitssatz]
-Sei $ O\subset \C $, $ z_0\in O $, $ f: O \setminus\{z_0\} \to \C $ differenzierbar, und
-\[
-\exists r>0 \exists M>0: |f(z)|\le M, \quad \text{ für } 0 <|z-z_0|<r
-\]
-Dann kann $ f $ in $ z=z_0 $ holomorph ergänzt werden.
-\end{st*}
+% \begin{st*}[Riemannscher Hebbarkeitssatz]
+% Sei $ O\subset \C $, $ z_0\in O $, $ f: O \setminus\{z_0\} \to \C $ differenzierbar, und
+% \[
+% \exists r>0 \exists M>0: |f(z)|\le M, \quad \text{ für } 0 <|z-z_0|<r
+% \]
+% Dann kann $ f $ in $ z=z_0 $ holomorph ergänzt werden.
+% \end{st*}
 
-\begin{st*}[messbare beschränkte Funktionen sind integrierbar]
-Ist $ f $ messbar und Lebesgue-beschränkt, so ist $ f $ integrierbar.
-\end{st*}
+% \begin{st*}[messbare beschränkte Funktionen sind integrierbar]
+% Ist $ f $ messbar und Lebesgue-beschränkt, so ist $ f $ integrierbar.
+% \end{st*}
 
-\begin{st*}[Cauchy-Integralformel]
-Sei $ G $ eine einfach zusammenhängendes Gebiet und $ \gamma $ ein stückweise stetig differenzierbarer, geschlossener und doppelpunktfreier Weg in $ G $, der im "`Gegenuhrzeigersinn"' orientiert ist. Weiter sei $ z $ im Inneren von $ \gamma $ und $ f $ holomorph auf $ G $. Dann gilt
-\[
-f(z)=\frac{1}{2\pi i} \int_\gamma \frac{f(\zeta)}{\zeta-z}\dx[\zeta].
-\]
-\end{st*}
+% \begin{st*}[Cauchy-Integralformel]
+% Sei $ G $ eine einfach zusammenhängendes Gebiet und $ \gamma $ ein stückweise stetig differenzierbarer, geschlossener und doppelpunktfreier Weg in $ G $, der im "`Gegenuhrzeigersinn"' orientiert ist. Weiter sei $ z $ im Inneren von $ \gamma $ und $ f $ holomorph auf $ G $. Dann gilt
+% \[
+% f(z)=\frac{1}{2\pi i} \int_\gamma \frac{f(\zeta)}{\zeta-z}\dx[\zeta].
+% \]
+% \end{st*}
 
-\begin{st*}[Cauchy-Kriterium für uneigentliche Integrale]
-Das uneigentliche Integral $ \int_r^\infty f(x) \dx $ ist genau dann konvergent, wenn
-\[
-\forall_{\eps>0}\exists_{c>0}\forall_{x', x''\ge c} \Bigg | \int_{x'}^{x''} f(x) \dx \Bigg | < \eps
-\]
-\end{st*}
+% \begin{st*}[Cauchy-Kriterium für uneigentliche Integrale]
+% Das uneigentliche Integral $ \int_r^\infty f(x) \dx $ ist genau dann konvergent, wenn
+% \[
+% \forall_{\eps>0}\exists_{c>0}\forall_{x', x''\ge c} \Bigg | \int_{x'}^{x''} f(x) \dx \Bigg | < \eps
+% \]
+% \end{st*}
 
-Die meisten anderen Sätze, die verwendet worden sind, sollten sich aus dem Kontext ergeben.
+% Die meisten anderen Sätze, die verwendet worden sind, sollten sich aus dem Kontext ergeben.
 
 \end{document}
