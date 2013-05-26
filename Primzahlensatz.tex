@@ -11,9 +11,9 @@
 Zunächst einige Definitionen. Es sei angemerkt, dass $ p $ stets Element aus der Menge aller Primzahlen sein soll.
 
 \begin{df}[Primzahlen zählende Funktion]
-Sei $ x\in \R $, dann definieren wir die \emph{Primzahlen zählende Funktion}, durch
+Sei $ x\in \R $, dann definieren wir die \emph{Primzahlen zählende Funktion} durch
 \[
-\pi(x):=|\{p\in \mathbb P| p \le x\}|=\sum_{p \in \mathbb P,\; p \le x} 1,
+\pi(x):=\Big|\{p\in \mathbb P| p \le x\}\Big|=\sum_{p \in \mathbb P,\; p \le x} 1,
 \]
 wobei $ \mathbb P $ die Menge aller Primzahlen bezeichnet.
 \end{df} 
@@ -31,10 +31,11 @@ wobei $ \mathbb P $ die Menge aller Primzahlen bezeichnet.
 \begin{df}[Landau-Symbolik, asymptotische Gleichheit]
 Sei $ f,g: \R\to \R $, dann sagen wir:
 \begin{itemize}
-\item $ f=O(g)$,wenn es ein $ c\in \R_+ $ gibt, sodass $ \forall_{x\in \R} |f(x)|\le c|g(x)| $.
+\item $ f=\mathcal O(g)$,wenn es ein $ c\in \R_+ $ gibt, sodass $ \forall_{x\in \R} |f(x)|\le c|g(x)| $.
 \item $ f\sim g $, wenn $ \lim_{x\to +\infty} \frac{f(x)}{g(x)}=1 $.
 \end{itemize}
 \end{df}
+
 Nun widmen wir uns dem Primzahlensatz.
 \begin{st}[Primzahlensatz]
 $ \pi(x)\sim \frac{x}{\ln x} $
@@ -51,11 +52,11 @@ $ \pi(x)\sim \frac{x}{\ln x} $
 Für den Beweis der Aussage brauchen wir zunächst einige Hilfssätze. Zunächst zeigen, wir, dass die Riemannsche Zetafunktion keine Nullstellen für $ \Re(z)\ge 1 $ haben kann und folgern schließlich mit Hilfe eines analytischen Arguments den Primzahlensatz.
 
 Wir definieren uns an dieser Stelle die drei Funktionen, die wir im Verlauf des Beweises benötigen. Vermöge
-\begin{align*}
-\zeta(z)&:=\sum_{n\in \N} \frac{1}{n^z}, z \in \C \text{ und } \Re(z)>1; \\
-\theta(x)&:=\sum_{p\in \mathbb P, \; p\le x} \ln p, x\in \R; \\
-\Phi(z)&:= \sum_{p\in \mathbb P} \frac{\ln p}{p^z}, z\in \C \text{ und } \Re(z)>1.
-\end{align*}
+\begin{alignat*}{2}
+\zeta(z)&:=\sum_{n\in \N} \frac{1}{n^z},&\qquad &z \in \C \text{ und } \Re(z)>1; \\
+\theta(x)&:=\sum_{p\in \mathbb P, \; p\le x} \ln p,&\qquad &x\in \R; \\
+\Phi(z)&:= \sum_{p\in \mathbb P} \frac{\ln p}{p^z},&\qquad &z\in \C \text{ und } \Re(z)>1.
+\end{alignat*}
 
 \begin{lem}[Fortsetzung der Riemannschen Zetafunktion]\label{pol}
 Die \emph{Riemannsche $ \zeta $-Funktion} ist holomorph fortsetzbar auf $ \{z\in \C| \Re(z)>0\} \setminus\{1\} $ und besitzt bei $ z=1 $ eine einfache Polstelle.
@@ -68,7 +69,7 @@ $ \Res(\zeta, 1)=1 $. Insbesondere ist die Funktion $ \zeta(z)-\frac{1}{z-1} $ h
 \begin{proof}
 mit dem Cauchy-Integralkriterium für Reihen folgt für $ x>1 $.
 \[
- \frac{1}{x-1}=\int_{1}^\infty \frac{1}{t^x} \, \mathrm dt \le \sum_{n=1}^\infty \frac{1}{n^x} \le 1+\int_{1}^\infty \frac{1}{t^x} \,\mathrm dt = 1+ \frac{1}{x-1}.
+ \frac{1}{x-1}=\int_{1}^\infty \frac{1}{t^x} \, \mathrm dt \le \underbrace{\sum_{n=1}^\infty \frac{1}{n^x}}_{\zeta(x)} \le 1+\int_{1}^\infty \frac{1}{t^x} \,\mathrm dt = 1+ \frac{1}{x-1}.
 \]
 Daraus folgt
 \[
@@ -88,7 +89,7 @@ Insbesondere besitzt die $ \zeta $-Funktion keine Nullstellen für $ \Re(z) >1$.
 \end{lem}
 
 \begin{lem} \label{linear}
-$ \theta(x)=O(x) $.
+$ \theta(x)=\mathcal O(x) $.
 \end{lem}
 
 \begin{proof}
@@ -100,11 +101,12 @@ Es ist
 \[
 \begin{pmatrix}2n \\ n \end{pmatrix} = \frac{(2n)!}{(n!)^2}\ge \prod_{p \in \mathbb P, \, n<p\le 2n} p.
 \]
-Da $ \begin{psmallmatrix} 2n \\ n \end{psmallmatrix} \in \N $ folgt $ (n!)^2$ teilt $ (2n)! $. Außerdem gilt auch $ \prod_{p \in \mathbb P, \, n<p\le 2n p} p$ teilt $(2n)!$. Und da die beiden Teiler teilerfremd sind, gilt insbesondere auch $ (n!)^2 \prod_{p \in \mathbb P, \, n<p\le 2n p} p$ teilt $(2n)! $ und es folgt die Ungleichung.
+% Ist diese Begrüngung wirklich nötig?
+Da $ \begin{psmallmatrix} 2n \\ n \end{psmallmatrix} \in \N $, folgt: $ (n!)^2$ teilt $ (2n)! $. Außerdem gilt auch: $ \prod_{p \in \mathbb P, \, n<p\le 2n} p$ teilt $(2n)!$. Da die beiden Teiler teilerfremd sind, gilt insbesondere auch $ (n!)^2 \prod_{p \in \mathbb P, \, n<p\le 2n} p$ teilt $(2n)! $ und es folgt die Ungleichung.
 
 Es ist
 \[
-2^{2n}\ge \prod_{p\in \P, n<p\le 2n} p =e^{\sum_{p\in \P, n< p \le 2n} \ln p}=e^{\theta(2n)-\theta(n)}.
+2^{2n}\ge \prod_{\substack{p\in \P \\ n<p\le 2n}} p =e^{\sum\limits_{p\in \P, n< p \le 2n} \ln p}=e^{\theta(2n)-\theta(n)}.
 \]
 Nach dem Logarithmieren folgt
 \[
@@ -112,14 +114,14 @@ Nach dem Logarithmieren folgt
 \]
 Wir betrachten im Folgenden für $ m\in \N $
 \begin{align*}
-\theta(2^m)&=\theta(2^m)-\underbrace{\theta(2^0)}_{=0}=\sum_{n=1}^m (\theta(2^m)-\theta(2^{m-1}) \\ 
-&\le \sum_{n=1}^m 2^m \ln 2 = (2^{m+1}-2)\ln 2< 2^{m+1} \ln 2.
+\theta(2^m)&=\theta(2^m)-\underbrace{\theta(2^0)}_{=0}=\sum_{n=1}^m (\theta(2^n)-\theta(2^{n-1}) \\ 
+&\le \sum_{n=1}^m 2^n \ln 2 = (2^{m+1}-2)\ln 2< 2^{m+1} \ln 2.
 \end{align*}
 Für alle $ x\ge 1 $ können wir $m$ derart wählen, dass $ 2^{m-1} \le x < 2^m $. Es folgt
 \[
 \theta(x) \le \theta(2^m) \le 2^{m+1}\ln 2 = (4 \ln 2)2^{m-1} \le (4 \ln 2) x.
 \]
-Für $ x\le 1 $ ist $ \theta(x)=0 $ und damit folgt insgesamt $ \theta(x)=O(x) $.
+Für $ x\le 1 $ ist $ \theta(x)=0 $ und damit folgt insgesamt $ \theta(x)=\mathcal O(x) $.
 \end{proof}
 
 \begin{lem}[Äquivalente Bedingung des Primzahlensatzes] \label{equiv}
@@ -137,9 +139,9 @@ Es folgt
 Sei $ \epsilon >0 $ beliebig. Dann gilt desweiteren
 \begin{align*}
 \theta(x) &\ge \sum_{p\in \mathbb P, \; x^{1-\eps}<p \le x} \ln p \ge  \sum_{p \in \mathbb P, \, x^{1-\eps} <p\le x} \ln (x^{1-\eps})\\
-&= (1-\eps) \ln(x) (\pi(x)-\pi(x^{1-\eps}))\ge (1-\eps) \ln(x) (\pi(x)- x^{1-\eps}).
+&= (1-\eps) \ln(x) \Big(\pi(x)-\pi(x^{1-\eps})\Big)\ge (1-\eps) \ln(x) \Big(\pi(x)- x^{1-\eps}\Big).
 \end{align*}
-Dann folgt insbesondere auch schon
+Dann folgt insbesondere auch schon % Vielleicht ein Zwischenschritt?
 \[
 0 \le \pi(x) \frac{\ln x}{x}- \frac{\theta(x)}{x} \le \frac{\eps}{1-\eps} \frac{\theta(x)}{x} + \frac{\ln(x)}{x^{\eps}}.
 \]
@@ -161,7 +163,7 @@ $ \zeta(z)\neq 0 $ für $ \Re(z) \ge 1 $ und $ \Phi(z)-\frac{1}{z-1} $ ist holom
 \item Wohldefiniertheit und Holomorphie von $ \Phi $:
 
 Hierfür zeigen wir die kompakte und absolute Konvergenz der Reihe 
-$\sum_{n=1}^\infty \frac{\ln n}{n^z}$. Um dies zu zeigen, suchen wir eine Majorante für $ \Re(z)\ge 1+\delta $, wobei $ \delta>0 $ beliebig gewählt ist, finden können, dann folgt die gleichmäßige Konvergenz nach dem Weierstraßschen M-Test. Jede kompakte Teilmenge ist in einer der Streifen zu finden und es folgt die Aussage (nach Weierstraß nimmt der Realteil sein Minimum an). Für hinreichend großes $ n_0 $ folgt mit $ \frac{\ln n}{n^{\delta/2}} \stackrel{n\to \infty}\to 0 $
+$\sum_{n=1}^\infty \frac{\ln n}{n^z}$. Um dies zu zeigen, suchen wir eine Majorante für $ \Re(z)\ge 1+\delta $, wobei $ \delta>0 $ beliebig gewählt ist. Dann folgt die gleichmäßige Konvergenz nach dem Weierstraßschen M-Test. Jede kompakte Teilmenge ist in einer der Streifen zu finden und es folgt die Aussage (nach Weierstraß nimmt der Realteil sein Minimum an). Für hinreichend großes $ n_0 $ folgt mit $ \frac{\ln n}{n^{\delta/2}} \stackrel{n\to \infty}\to 0 $
 \[
 \sum_{n=n_0}^\infty \Big |\frac{\ln n}{n^z} \Big |  = \sum_{n=n_0}^\infty  \frac{\ln n}{n^{\Re(z)}} \le \sum_{n=n_0}^\infty \frac{n^{\delta/2}}{n^{\Re(z)}}\le \sum_{n=n_0}^\infty \frac{1}{n^{1+\delta/2}} < \infty.
 \]
@@ -190,26 +192,26 @@ ergibt sich
 Sei $ \Re(z) \ge \frac{1}{2} + \delta $ für $ \delta>0 $ beliebig. Für hinreichend große $ p $ folgt ähnlich wie oben
 \[
 \Big | \frac{\ln p}{p^z(p^z-1)}\Big | \le \frac{p^{\delta}}{p^{1/2+\delta}\cdot \frac{1}{2} p^{1/2+\delta}}= 2 \frac{1}{p^{1+\delta}}.
-\]
+\] % Hier würde ich einen Zwischenschritt machen bei der ersten Ungleichung
 
-Es folgt die kompakten und absoluten Konvergenz (s.o.) von $ \sum_{p\in \P} \frac{\ln p}{p^z(p^z-1)} $ für $ \Re(z)>\frac{1}{2} $. Damit folgt, dass $ H(z) $ wohldefiniert und holomorph ist. Insbesondere haben wir eine meromorphe Fortsetzung von $ \Phi(z) $ gefunden, wobei die Singularitäten gerade bei den Null- und Polstellen von $ \zeta(z) $ liegen (Die Nullstellen einer von 0 verscheidenen Funktion innehrhalb eines Gebiets sind isoliert). 
+Es folgt die kompakten und absoluten Konvergenz (s.o.) von $ \sum_{p\in \P} \frac{\ln p}{p^z(p^z-1)} $ für $ \Re(z)>\frac{1}{2} $. Damit folgt, dass $ H(z) $ wohldefiniert und holomorph ist. Insbesondere haben wir eine meromorphe Fortsetzung $ \Phi(z) = -\frac{\zeta'(z)}{\zeta(z)} - H(z)$ gefunden, wobei die Singularitäten gerade bei den Null- und Polstellen von $ \zeta(z) $ liegen (Die Nullstellen einer von 0 verscheidenen Funktion innehrhalb eines Gebiets sind isoliert). 
 
 Wir zeigen nun die Holomorphie von $ \Phi(z)-\frac{1}{z-1} $ im Punkt $ z=1 $ (die einzige Polstelle von $ \zeta $). Nach Lemma \ref{pol} folgt, dass es holomorphe Funktionen $ H_1, H_2 $ gibt mit 
 \[
 \zeta(z)=\frac{1}{z-1}+ H_1(z) \text{ und } \zeta'(z)=- \frac{1}{(z-1)^2}+ \underbrace{H_2(z)}_{:=H_1'(z)}
 \]
-auf $ \Re(z)>\frac{1}{2} $. Es gilt
+für $ \Re(z)>\frac{1}{2} $. Es gilt
 \[
 \frac{\zeta'(z)}{\zeta(z)}+ \frac{1}{z-1}= \frac{(z-1) \zeta'(z)+\zeta(z)}{(z-1)\zeta(z)}= \frac{H_1(z)+(z-1)H_2(z)}{1+(z-1) H_1(z)}.
 \]
-Offensichtlich ist $\tilde H(z):= \Phi(z) - \frac{1}{z-1} $ damit in $ z=1 $ stetig ergänzbar bzw. mit dem Riemannschen Hebbarkeitssatz folgt, dass $ \tilde H(z)= \Phi(z) - \frac{1}{z-1} $ auch holomorph in $ z=1 $ ergänzt werden kann.
+Offensichtlich ist $\tilde H(z):= \Phi(z) - \frac{1}{z-1} $ damit in $ z=1 $ stetig ergänzbar bzw. mit dem Riemannschen Hebbarkeitssatz folgt, dass $ \tilde H(z)= \Phi(z) - \frac{1}{z-1} $ auch holomorph in $ z=1 $ ergänzt werden kann. % Riemann reicht doch, vlt mit einer kurzen Begründung für die Beschränktheit
 \item $ \zeta(z)\neq 0 $, für $ \Re(z)\ge 1, z\neq 1 $
 Nach Lemma \ref{euler} genügt es potentielle Nullstellen für $ \Re(z)=1 $ zu untersuchen.
 Mit dieser Aussage wäre gezeigt, dass $ \Phi(z)-\frac{1}{z-1} $ holomorph auf einer Obermenge von $ \{z| \Re(z) \ge 1\} $ ist.
 
 Zunächst merken wir an, dass
 \[
-\lim_{\eps \to 0+} \eps \Phi(1+\eps)= \lim_{\eps \to 0+} \eps(\tilde H(1+\eps)+\frac{1}{\eps})=1.
+\lim_{\eps \to 0+} \eps \Phi(1+\eps)= \lim_{\eps \to 0+} \eps\Big(\tilde H(1+\eps)+\tfrac{1}{\eps}\Big)=1.
 \]
 Sei $\alpha \in \R\setminus\{0\}$, $ z_1=1+i\alpha $ Nullstelle mit Ordnung $ \mu\in \N_0 $ und $ z_2=1+2i\alpha $ Nullstelle mit Ordnung $\nu\in \N_0$. 
 \begin{seg}[Sei $ \mu=0 $]
@@ -261,7 +263,7 @@ und es folgt $ \mu=0 $.
 Sei $ f:[0, \infty) \to \R $ beschränkt und messbar. Weiter sei $ g:\{z\in \C|\Re z >0\} \to \C, z \mapsto \int_{0}^\infty f(t) e^{-zt}\dx[t] $ holomorph. Zudem gebe es eine holomorphe Fortsetzung von $ g $ auf einer offene Obermenge von $ \{z \in \C| \Re(z) \ge 0\} $. Dann existiert $ \lim_{T\to \infty} \int_0^T f(t) \dx[t] $, und der Grenzwert hat den Wert $ g(0) $
 \end{st}
 \begin{proof}
-Für $ T>0 $ setzen wir $ g_T: \C \to \C $ vermöge $ g_T(z):= \int_{0}^T f(t) e^{-zt}\dx[t] $. Wegen der Beschränktheit und Messbarkeit von $ f $ ist $ g_T $ wohldefiniert. $ g_T $ ist eine ganze Funktion, denn betrachten wir den Differentialquotienten
+Für $ T>0 $ setzen wir $ g_T: \C \to \C $ als $ g_T(z):= \int_{0}^T f(t) e^{-zt}\dx[t] $. Wegen der Beschränktheit und Messbarkeit von $ f $ ist $ g_T $ wohldefiniert. $ g_T $ ist eine ganze Funktion, denn betrachten wir den Differentialquotienten
 \[
 \Big | \frac{g_T(z+h)-g_T(z)}{h}+ \int_0^T t f(t) e^{-zt}\dx[t]\Big |\le \int_0^T |f(t) e^{-zt}| \Big | \frac{e^{-ht}-1+ht}h \Big | \dx[t].
 \]
