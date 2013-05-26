@@ -1,0 +1,421 @@
+\documentclass{mywork}
+\addtolength{\headheight}{\baselineskip}
+\lhead{Proseminar - Funktionentheorie \\ \today}
+\chead{Newtons Beweis des Primzahlensatzes}
+\rhead{\theauthor}
+\renewcommand{\theta}{\vartheta}
+\cfoot[LE,RO]{\bfseries\color{gray} -~\thepage~-}
+\usepackage{pgfplots}
+\begin{document}
+\section*{Der Primzahlensatz}
+Zunächst einige Definitionen. Es sei angemerkt, dass $ p $ stets Element aus der Menge aller Primzahlen sein soll.
+
+\begin{df}[Primzahlen zählende Funktion]
+Sei $ x\in \R $, dann definieren wir die \emph{Primzahlen zählende Funktion}, durch
+\[
+\pi(x):=|\{p\in \mathbb P| p \le x\}|=\sum_{p \in \mathbb P,\; p \le x} 1,
+\]
+wobei $ \mathbb P $ die Menge aller Primzahlen bezeichnet.
+\end{df} 
+\begin{figure}[H]
+	\centering
+	\newlength\figureheight 
+	\newlength\figurewidth 
+	\setlength\figureheight{6cm} 
+	\setlength\figurewidth{10cm}
+	\input{pi.tikz}
+	\caption{$ \pi(x) $ von $ [0,100] $}
+	\label{fig:pi}
+\end{figure}
+
+\begin{df}[Landau-Symbolik, asymptotische Gleichheit]
+Sei $ f,g: \R\to \R $, dann sagen wir:
+\begin{itemize}
+\item $ f=O(g)$,wenn es ein $ c\in \R_+ $ gibt, sodass $ \forall_{x\in \R} |f(x)|\le c|g(x)| $.
+\item $ f\sim g $, wenn $ \lim_{x\to +\infty} \frac{f(x)}{g(x)}=1 $.
+\end{itemize}
+\end{df}
+Nun widmen wir uns dem Primzahlensatz.
+\begin{st}[Primzahlensatz]
+$ \pi(x)\sim \frac{x}{\ln x} $
+\end{st}
+\begin{figure}[H]
+	\centering
+	\setlength\figureheight{3cm} 
+	\setlength\figurewidth{5cm}
+	\begin{minipage}{5cm}\input{Quotient.tikz}\end{minipage} \hspace{3cm} \begin{minipage}{5cm}\input{Primzahlensatz.tikz} \end{minipage}
+	\caption{links: Graph von $\frac{\pi(x) \ln x}x$, rechts: Graphen von $ \pi(x) $(fest) und $ \frac{x}{\ln x} $(punktiert)}
+	\label{fig:quotient}
+\end{figure}
+
+Für den Beweis der Aussage brauchen wir zunächst einige Hilfssätze. Zunächst zeigen, wir, dass die Riemannsche Zetafunktion keine Nullstellen für $ \Re(z)\ge 1 $ haben kann und folgern schließlich mit Hilfe eines analytischen Arguments den Primzahlensatz.
+
+Wir definieren uns an dieser Stelle die drei Funktionen, die wir im Verlauf des Beweises benötigen. Vermöge
+\begin{align*}
+\zeta(z)&:=\sum_{n\in \N} \frac{1}{n^z}, z \in \C \text{ und } \Re(z)>1; \\
+\theta(x)&:=\sum_{p\in \mathbb P, \; p\le x} \ln p, x\in \R; \\
+\Phi(z)&:= \sum_{p\in \mathbb P} \frac{\ln p}{p^z}, z\in \C \text{ und } \Re(z)>1.
+\end{align*}
+
+\begin{lem}[Fortsetzung der Riemannschen Zetafunktion]\label{pol}
+Die \emph{Riemannsche $ \zeta $-Funktion} ist holomorph fortsetzbar auf $ \{z\in \C| \Re(z)>0\} \setminus\{1\} $ und besitzt bei $ z=1 $ eine einfache Polstelle.
+\end{lem}
+\begin{proof}[Übung]
+\end{proof}
+\begin{lem}[Residuum an der Stelle $ x=1 $]
+$ \Res(\zeta, 1)=1 $. Insbesondere ist die Funktion $ \zeta(z)-\frac{1}{z-1} $ holomorph Fortsetzbar auf $ \{z \in \C | \Re(z)>0\} $.
+\end{lem}
+\begin{proof}
+mit dem Cauchy-Integralkriterium für Reihen folgt für $ x>1 $.
+\[
+ \frac{1}{x-1}=\int_{1}^\infty \frac{1}{t^x} \, \mathrm dt \le \sum_{n=1}^\infty \frac{1}{n^x} \le 1+\int_{1}^\infty \frac{1}{t^x} \,\mathrm dt = 1+ \frac{1}{x-1}.
+\]
+Daraus folgt
+\[
+1\le (x-1) \zeta(x) \le (x-1)+1.
+\]
+Gehen wir zum Grenzwert $ x\to 1+ $ über, so ergibt sich mit Lemma \ref{pol}
+\[
+\Res(\zeta, 1)=\lim_{x\to 1+} (x-1)\zeta(x)=1.
+\]
+\end{proof}
+\begin{lem}[Eulersche Produktformel] \label{euler}
+Für $ \Re(z)>1 $ gilt
+\[
+\zeta(z)=\prod_{p\in \mathbb P} (1- p^{-z})^{-1}.
+\]
+Insbesondere besitzt die $ \zeta $-Funktion keine Nullstellen für $ \Re(z) >1$.
+\end{lem}
+
+\begin{lem} \label{linear}
+$ \theta(x)=O(x) $.
+\end{lem}
+
+\begin{proof}
+Sei $ n\in \N $. Mit dem Binomiallehrsatz folgt:
+\[
+2^{2n} = (1+1)^{2n}=\sum_{k=0}^{2n} \begin{pmatrix} 2n \\ k \end{pmatrix} \ge \begin{pmatrix} 2n \\ n \end{pmatrix}.
+\]
+Es ist 
+\[
+\begin{pmatrix}2n \\ n \end{pmatrix} = \frac{(2n)!}{(n!)^2}\ge \prod_{p \in \mathbb P, \, n<p\le 2n} p.
+\]
+Da $ \begin{psmallmatrix} 2n \\ n \end{psmallmatrix} \in \N $ folgt $ (n!)^2$ teilt $ (2n)! $. Außerdem gilt auch $ \prod_{p \in \mathbb P, \, n<p\le 2n p} p$ teilt $(2n)!$. Und da die beiden Teiler teilerfremd sind, gilt insbesondere auch $ (n!)^2 \prod_{p \in \mathbb P, \, n<p\le 2n p} p$ teilt $(2n)! $ und es folgt die Ungleichung.
+
+Es ist
+\[
+2^{2n}\ge \prod_{p\in \P, n<p\le 2n} p =e^{\sum_{p\in \P, n< p \le 2n} \ln p}=e^{\theta(2n)-\theta(n)}.
+\]
+Nach dem Logarithmieren folgt
+\[
+\theta(2n)-\theta(n)\le 2n \ln 2.
+\]
+Wir betrachten im Folgenden für $ m\in \N $
+\begin{align*}
+\theta(2^m)&=\theta(2^m)-\underbrace{\theta(2^0)}_{=0}=\sum_{n=1}^m (\theta(2^m)-\theta(2^{m-1}) \\ 
+&\le \sum_{n=1}^m 2^m \ln 2 = (2^{m+1}-2)\ln 2< 2^{m+1} \ln 2.
+\end{align*}
+Für alle $ x\ge 1 $ können wir $m$ derart wählen, dass $ 2^{m-1} \le x < 2^m $. Es folgt
+\[
+\theta(x) \le \theta(2^m) \le 2^{m+1}\ln 2 = (4 \ln 2)2^{m-1} \le (4 \ln 2) x.
+\]
+Für $ x\le 1 $ ist $ \theta(x)=0 $ und damit folgt insgesamt $ \theta(x)=O(x) $.
+\end{proof}
+
+\begin{lem}[Äquivalente Bedingung des Primzahlensatzes] \label{equiv}
+$ \theta(x) \sim x \iff \pi(x) \sim \frac{x}{\ln x} $.
+\end{lem}
+\begin{proof}
+Für $ x\ge 1 $ gilt
+\[
+0 \le \theta(x) = \sum_{p \in \mathbb P, \; p\le x} \underbrace{\ln p}_{\le \ln x}\le \sum_{p \in \mathbb P, \; p\le x} \ln x = \pi(x) \ln x.
+\]
+Es folgt
+\[
+\frac{\theta(x)}{x} \le \pi(x) \frac{\ln x}{x}.
+\]
+Sei $ \epsilon >0 $ beliebig. Dann gilt desweiteren
+\begin{align*}
+\theta(x) &\ge \sum_{p\in \mathbb P, \; x^{1-\eps}<p \le x} \ln p \ge  \sum_{p \in \mathbb P, \, x^{1-\eps} <p\le x} \ln (x^{1-\eps})\\
+&= (1-\eps) \ln(x) (\pi(x)-\pi(x^{1-\eps}))\ge (1-\eps) \ln(x) (\pi(x)- x^{1-\eps}).
+\end{align*}
+Dann folgt insbesondere auch schon
+\[
+0 \le \pi(x) \frac{\ln x}{x}- \frac{\theta(x)}{x} \le \frac{\eps}{1-\eps} \frac{\theta(x)}{x} + \frac{\ln(x)}{x^{\eps}}.
+\]
+Für hinreichend große $ x $ folgt nach Lemma \ref{linear} die Existenz von $ c\in \R_+ $, sodass für alle $ x\ge 0 $ $ \frac{\theta(x)}{x}\le c  $. Wähle $ \eps:= \frac{\tilde \eps}{2c+\tilde \eps} $. Sei $ x $ desweiteren hinreichend groß, sodass für fest gewähltes $ \eps $
+\[ \frac{\ln x}{x^\eps} < \frac{\tilde \eps}{2} \]
+gilt. Insgesamt folgt also
+\[
+\Big |\pi(x) \frac{\ln x}{x}- \frac{\theta(x)}{x}\Big | < \frac{\tilde \eps}{2} + \frac{\tilde \eps}{2}= \tilde \eps. 
+\]
+Schließlich folgt $ \pi(x) \sim \frac{x}{\ln x} \iff \theta(x) \sim x $.
+\end{proof}
+
+\begin{lem} \label{hol}
+$ \zeta(z)\neq 0 $ für $ \Re(z) \ge 1 $ und $ \Phi(z)-\frac{1}{z-1} $ ist holomorph fortsetzbar auf einer Obermenge von $ \{z\in \C| \Re(z)\ge 1\} $
+\end{lem}
+
+\begin{proof}
+\begin{enumerate}[1)]
+\item Wohldefiniertheit und Holomorphie von $ \Phi $:
+
+Hierfür zeigen wir die kompakte und absolute Konvergenz der Reihe 
+$\sum_{n=1}^\infty \frac{\ln n}{n^z}$. Um dies zu zeigen, suchen wir eine Majorante für $ \Re(z)\ge 1+\delta $, wobei $ \delta>0 $ beliebig gewählt ist, finden können, dann folgt die gleichmäßige Konvergenz nach dem Weierstraßschen M-Test. Jede kompakte Teilmenge ist in einer der Streifen zu finden und es folgt die Aussage (nach Weierstraß nimmt der Realteil sein Minimum an). Für hinreichend großes $ n_0 $ folgt mit $ \frac{\ln n}{n^{\delta/2}} \stackrel{n\to \infty}\to 0 $
+\[
+\sum_{n=n_0}^\infty \Big |\frac{\ln n}{n^z} \Big |  = \sum_{n=n_0}^\infty  \frac{\ln n}{n^{\Re(z)}} \le \sum_{n=n_0}^\infty \frac{n^{\delta/2}}{n^{\Re(z)}}\le \sum_{n=n_0}^\infty \frac{1}{n^{1+\delta/2}} < \infty.
+\]
+\item Konstruktion einer meromorphen Fortsetzung:
+
+Für $ \Re(z)>1 $ gilt mit der Eulerschen Produktformel
+\[
+\zeta(z)=\prod_{p\in \P} (1-p^{-z})^{-1}.
+\]
+Auf einer geeigneten Umgebung lässt sich der komplexe Logarithmus definieren. Anwenden des Logarithmus auf die Eulersche Produktformel ergibt:
+\[
+\ln \zeta(z) = \ln \prod_{p\in \P}(1-p^{-z})^{-1}=- \sum_{p\in \P}\ln(1-p^{-z})
+\]
+Differenzieren auf beiden Seiten ergibt
+\begin{align*}
+(\ln(\zeta(z))'&= - \Bigg (\sum_{p\in \P}\ln(1-p^{-z})\Bigg )'\\
+-\frac{\zeta'(z)}{\zeta(z)}&= \sum_{p\in \P} \frac{p^{-z} \ln p}{1-p^{-z}}=\sum_{p\in \P} \frac{\ln p}{p^z-1}.
+\end{align*}
+Mit der Identität 
+$\frac{1}{p^z-1}=\frac{1}{p^z} + \frac{1}{p^z(p^z-1)}$ 
+ergibt sich
+\[
+-\frac{\zeta'(z)}{\zeta(z)}= \Phi(z)+ \underbrace{\sum_{p\in \P} \frac{\ln p}{p^z(p^z-1)}}_{=:H(z)}.
+\]
+
+Sei $ \Re(z) \ge \frac{1}{2} + \delta $ für $ \delta>0 $ beliebig. Für hinreichend große $ p $ folgt ähnlich wie oben
+\[
+\Big | \frac{\ln p}{p^z(p^z-1)}\Big | \le \frac{p^{\delta}}{p^{1/2+\delta}\cdot \frac{1}{2} p^{1/2+\delta}}= 2 \frac{1}{p^{1+\delta}}.
+\]
+
+Es folgt die kompakten und absoluten Konvergenz (s.o.) von $ \sum_{p\in \P} \frac{\ln p}{p^z(p^z-1)} $ für $ \Re(z)>\frac{1}{2} $. Damit folgt, dass $ H(z) $ wohldefiniert und holomorph ist. Insbesondere haben wir eine meromorphe Fortsetzung von $ \Phi(z) $ gefunden, wobei die Singularitäten gerade bei den Null- und Polstellen von $ \zeta(z) $ liegen (Die Nullstellen einer von 0 verscheidenen Funktion innehrhalb eines Gebiets sind isoliert). 
+
+Wir zeigen nun die Holomorphie von $ \Phi(z)-\frac{1}{z-1} $ im Punkt $ z=1 $ (die einzige Polstelle von $ \zeta $). Nach Lemma \ref{pol} folgt, dass es holomorphe Funktionen $ H_1, H_2 $ gibt mit 
+\[
+\zeta(z)=\frac{1}{z-1}+ H_1(z) \text{ und } \zeta'(z)=- \frac{1}{(z-1)^2}+ \underbrace{H_2(z)}_{:=H_1'(z)}
+\]
+auf $ \Re(z)>\frac{1}{2} $. Es gilt
+\[
+\frac{\zeta'(z)}{\zeta(z)}+ \frac{1}{z-1}= \frac{(z-1) \zeta'(z)+\zeta(z)}{(z-1)\zeta(z)}= \frac{H_1(z)+(z-1)H_2(z)}{1+(z-1) H_1(z)}.
+\]
+Offensichtlich ist $\tilde H(z):= \Phi(z) - \frac{1}{z-1} $ damit in $ z=1 $ stetig ergänzbar bzw. mit dem Riemannschen Hebbarkeitssatz folgt, dass $ \tilde H(z)= \Phi(z) - \frac{1}{z-1} $ auch holomorph in $ z=1 $ ergänzt werden kann.
+\item $ \zeta(z)\neq 0 $, für $ \Re(z)\ge 1, z\neq 1 $
+Nach Lemma \ref{euler} genügt es potentielle Nullstellen für $ \Re(z)=1 $ zu untersuchen.
+Mit dieser Aussage wäre gezeigt, dass $ \Phi(z)-\frac{1}{z-1} $ holomorph auf einer Obermenge von $ \{z| \Re(z) \ge 1\} $ ist.
+
+Zunächst merken wir an, dass
+\[
+\lim_{\eps \to 0+} \eps \Phi(1+\eps)= \lim_{\eps \to 0+} \eps(\tilde H(1+\eps)+\frac{1}{\eps})=1.
+\]
+Sei $\alpha \in \R\setminus\{0\}$, $ z_1=1+i\alpha $ Nullstelle mit Ordnung $ \mu\in \N_0 $ und $ z_2=1+2i\alpha $ Nullstelle mit Ordnung $\nu\in \N_0$. 
+\begin{seg}[Sei $ \mu=0 $]
+\[
+\lim_{\eps\to 0+} \eps \Phi(1+\eps+i\alpha)=0
+\]
+\end{seg}
+\begin{seg}[Sei $ \mu\neq 0 $]
+Es existiert nach Definition von $ \mu $ $ h_1, h_2 $ holomorph mit
+\begin{align*}
+\zeta(z)&=c (z-1-i\alpha)^\mu + (z-1-i\alpha)^{\mu+1} h_1(z)\\
+\zeta'(z)&= \mu c (z-1-ia)^{\mu-1} + (s-1-i\alpha)^{\mu} h_2(z)
+\end{align*}
+Es folgt
+\[
+-\eps \frac{\zeta'(1+\eps+i\alpha)}{\zeta(1+\eps+i\alpha)}=-\eps \frac{\mu c \eps^{\mu-1} + \eps^{\mu} h_2(1+\eps+i\alpha)}{c\eps^{\mu} + \eps^{\mu+1} h_1(1+\eps+i\alpha)} =- \frac{ \mu c+ \eps h_2(1+\eps+i\alpha)}{c + \eps h_2(1+\eps+i\alpha)}.
+\]
+\end{seg}
+Und damit
+\[
+\lim_{\eps\to 0+}\eps \Phi(1+\eps+i\alpha)= \lim_{\eps\to 0+}- \eps\frac{\zeta'(1+\eps+i\alpha)}{\zeta(1+\eps+i\alpha)} =-\mu.
+\]
+Völlig analog folgt auch
+\[
+\lim_{\eps\to 0+} \eps \Phi(1+\eps+2i\alpha)=-\nu.
+\]
+Es ist für $ \Re(z)>1 $
+\[
+\overline{\zeta(z)}=\overline{\sum_{n=1}^\infty n^{-z}}= \sum_{n=1}^\infty n^{-\overline z} = \zeta(\overline z).
+\] 
+Und damit folgt schließlich auch
+\[
+\lim_{\eps\to 0+} \eps \Phi(1+\eps-i\alpha)= \lim_{\eps\to 0+}- \eps \overline{\frac{\zeta'(z_1)}{\zeta(z_1)}}  =-\mu \text{ und } \lim_{\eps\to 0+} \eps \Phi(1+\eps-2i\alpha)=-\nu.
+\]
+Wir betrachten nun
+\begin{align*}
+\sum_{r=-2}^2 \begin{pmatrix} 4 \\ 2+r \end{pmatrix} \Phi(1+\eps+ir\alpha)&=\sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \sum_{r=-2}^2 \begin{pmatrix} 4 \\ 2+r \end{pmatrix} p^{-ir\alpha} \\ 
+&= \sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \sum_{r=0}^4 \begin{pmatrix} 4 \\ r \end{pmatrix} \Big(p^{-i\frac{\alpha}{2}}\Big)^r \Big ( p^{i\frac \alpha 2}\Big )^{4-r}\\
+&= \sum_{p\in \P} \frac{\ln p}{p^{1+\eps}} \Big(\underbrace{p^{-i\frac\alpha 2} + p^{i \frac \alpha 2}}_{=2\Re\Big(p^{i \frac \alpha 2}\Big)}\Big)^4\ge 0.
+\end{align*}
+Gehen wir zum Grenzwert $ \eps \to 0+ $ über, so erhalten wir die Ungleichung
+\[
+-\nu - 4\mu + 6 - 4\mu - \nu = 6-8 \mu - 2\nu \ge 0,
+\]
+und es folgt $ \mu=0 $.
+\end{enumerate}
+\end{proof}
+\begin{st}[Analytisches Argument] \label{ana}
+Sei $ f:[0, \infty) \to \R $ beschränkt und messbar. Weiter sei $ g:\{z\in \C|\Re z >0\} \to \C, z \mapsto \int_{0}^\infty f(t) e^{-zt}\dx[t] $ holomorph. Zudem gebe es eine holomorphe Fortsetzung von $ g $ auf einer offene Obermenge von $ \{z \in \C| \Re(z) \ge 0\} $. Dann existiert $ \lim_{T\to \infty} \int_0^T f(t) \dx[t] $, und der Grenzwert hat den Wert $ g(0) $
+\end{st}
+\begin{proof}
+Für $ T>0 $ setzen wir $ g_T: \C \to \C $ vermöge $ g_T(z):= \int_{0}^T f(t) e^{-zt}\dx[t] $. Wegen der Beschränktheit und Messbarkeit von $ f $ ist $ g_T $ wohldefiniert. $ g_T $ ist eine ganze Funktion, denn betrachten wir den Differentialquotienten
+\[
+\Big | \frac{g_T(z+h)-g_T(z)}{h}+ \int_0^T t f(t) e^{-zt}\dx[t]\Big |\le \int_0^T |f(t) e^{-zt}| \Big | \frac{e^{-ht}-1+ht}h \Big | \dx[t].
+\]
+Setze $ F(x):= e^{-zht} $. Es ist
+\[
+\Big | \frac{e^{-ht}-1+ht}h \Big | \le \int_0^1 \int_0^x |ht^2 e^{-yht}|\dx[y]\dx\le |h|T^2 e^{|h| T} \frac{T^2}{2}\stackrel{h\to 0}\to 0.
+\]
+Und damit folgt die Holomorphität von $ g_T $ auf ganz $ \C $. Sei $ R>0 $ beliebig und $ C $ der orientierte Rand des konvexen (insbesondere einfach zusammenhängenden) berandeten Gebiets $ \{z  \in \C | \Re(z) \ge - \delta\} $, wobei $ \delta>0 $ derart gewählt ist, dass $ g $ holomorph im berandeten Gebiet ist. Es folgt leicht mittels Anwendung von Heine-Borel auf der Strecke $ \overline{-Ri, Ri} $, dass wir ein $ \delta:=\delta(R)>0 $ finden, sodass $ g $ auf $ \{ z \in \C | \Re(z) > - 2 \delta\} $ holomorph ist. Betrachte hierfür eine offene Überdeckung von $ \overline{-Ri, Ri} $ aus offenen Quadraten der Form $ \{z\in \C| |\Re(z-x)|<\delta \text{ und } |\Im(z-x)|<\delta_x\} $ auf denen $ g $ holomorph ist. Dann findet sich eine endliche Teilüberdeckung $ \{Q_1,..., Q_N\} $ und sei $ a $ die kleinsten Seitenlänge  aus unserer endlichen Teilüberdeckung, dann wähle $ \delta:= \frac{a}{4} $.
+
+Setze $ G(z):=(g(z)-g_T(z))e^{zT} (1+ \frac{z^2}{R^2}) $. Mit der Cauchyschen Integralformel folgt
+\[
+g(0)-g_{T}(0)=G(0)=\frac{1}{2\pi i} \int_C (g(z)-g_T(z)) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z}.
+\]
+Wir spalten im Folgenden den Integrationsweg in zwei Teilwege
+\[
+C_+:= C \cap \{z\in \C| \Re(z)>0\} \text{ und } C_-:= C\cap \{z\in \C|\Re(z)<0\}
+\]
+auf. Es ist
+\begin{align*}
+|g(0)-g_T(0)|\le \Bigg|\frac{1}{2\pi i} \int_{C_+} (g(z)&-g_T(z)) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z}\Bigg|\\ &+ \Bigg| \frac{1}{2\pi i} \int_{C_-} g(z) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z} \Bigg|+ \Bigg| \frac{1}{2\pi i} \int_{C_-} (g(z)-g_T(z)) e^{zT} (1+\frac {z^2} {R^2})\frac{\dx[z]}{z} \Bigg|.
+\end{align*}
+Setze $ B:=\sup\{|f(t)|\, | t\ge 0\} $. Es folgt für den Integrationsweg $ C_+ $
+\[
+|g(z)-g_T(z)|=\Bigg | \int_T^\infty f(t) e^{-zt}\dx[t]\Bigg |\le B \int_T^\infty |e^{-zt}| \dx[t]=\frac{Be^{-\Re(z) T}}{\Re(z)}.
+\]
+Weiterhin gilt
+\begin{align*}
+\Big|e^{zT} (1+\frac{z^2}{R^2}) \frac{1}{z}\Big |= \frac{e^{\Re(z)T}}{R^2} |(z^2+R^2)\cdot \frac{1}{z}| \stackrel{R^2=z\bar z}=  \frac{e^{\Re(z)T}}{R^2} \cdot |z+\bar z|=\frac{e^{\Re(z)T}}{R^2}\cdot 2 \Re(z).
+\end{align*}
+Wir können also abschätzen
+\[
+\Bigg | \frac{1}{2\pi i} \int_{C_+} (g(z)-g_T(z))e^{zT} (1+\frac{z^2}{R^2}) \frac{\dx[z]}{z}\Bigg| \le \frac{\pi R}{2\pi} \cdot \frac{e^{\Re(z) T}}{R^2} \cdot 2 \Re(z) \cdot \frac{Be^{-\Re(z) T}}{\Re(z)}= \frac{B}{R}.
+\]
+Für $ C_- $ betrachten wir die Integrale für $ g $ und $ g_T $ seperat. Sei $ \tilde C_-=\{z\in \C||z|=R, \Re(z)<0\} $. Da $ g_T $ ganz ist, können wir den Integrationweg $ C_- $ durch diesen ersetzen. Dann folgt
+\[
+|g_T(z)|=\Bigg|\int_0^T f(t) e^{-zt} \dx[t]\Bigg|\le B \int_0^T e^{- \Re(z)t} \dx[t]\le \frac{Be^{-\Re(z)T}}{|\Re(z)|}.
+\]
+Ähnlich wie oben folgt auch 
+ \[
+ \Big |e^{zT}(1+\frac{z^2}{R^2})\frac{1}{z}\Big |=...= \frac{e^{\Re(z) T}}{R^2} \cdot 2 |\Re(z)|.
+ \]
+Schließlich,
+\[
+\Bigg | \frac{1}{2\pi i} \int_{\tilde C_-} (g(z)-g_T(z))e^{zT} (1+\frac{z^2}{R^2}) \frac{\dx[z]}{z}\Bigg| \le ...\frac{B}{R}.
+\]
+Wir können also $ R $ so groß wählen, dass $ \frac{B}{R}< \frac{\eps}{4} $. Das verbleibende Integral wird für genügend kleines $ t $ und dazu passend hinreichend große $T$ beliebig klein. Um dies zu zeigen, wählen wir $ 0<t\le \delta $ beliebig. Setze $ S:=\sup\{|g(z)|\Big|1+\frac{z^2}{R^2}\Big|\frac{1}{|z|}, z \in C_-\} $. Dann folgt mit hinreichend großem $ T $
+\begin{align*}
+\Bigg |\frac{1}{2\pi i} \int_{C_-}g(z) e^{zT} \Big(1+\frac{z^2}{R^2}\Big) \frac{\dx[z]}{|z|} \Bigg|&\le \frac{S}{2\pi} \cdot\Bigg ( \Bigg | \int_{C_- \cap \{z: \Re{z}\le t\}} \underbrace{e^{zT}}_{|\cdot|\le e^{tT}}\dx[z]\Bigg |+ \Bigg | \int_{C_- \cap \{z: \Re{z}\ge t\}} \underbrace{e^{zT}}_{|\cdot|\le 1}\dx[z]\Bigg | \Bigg)\\
+&\le   \frac{S}{2\pi} ( L(C_- \cap \{z: \Re{z}\le t\}) e^{tT}+ L(C_- \cap \{z: \Re{z}\ge t\}) )\\
+&\le   \frac{S}{2\pi} ( \underbrace{L(C_- \cap \{z: \Re{z}\le t\}) e^{tT}}_{\le \frac{\pi\eps}{2S}} + \underbrace{R+t-\sqrt{R^2-t^2}}_{\le \frac{\pi\eps}{2S}}\\
+&= \frac{\eps}{2}.
+\end{align*}
+Insgesamt folgt schließlich für hinreichend großes T und $ \eps>0 $
+\[
+|g(0)-g_T(0)|\le \eps.
+\]
+\end{proof}
+\begin{lem} \label{int}
+$ \int_1^\infty \frac{\theta(x)-x}{x^2}\dx $ existiert.
+\end{lem}
+\begin{proof}
+Für $ \Re(z)>1 $ folgt mit partieller Summation
+\begin{align*}
+\Phi(z)&=\sum_{p\in \P} \frac{\ln p}{p^z}= \lim_{x\to \infty} \sum_{p\in \P, \, p\le x} \frac{\ln p}{p^z}\\
+ &= \lim_{x\to \infty} \underbrace{\frac{\theta(x)}{x^z}}_{\stackrel{\text{Lem. \ref{linear}}}\to 0}+ z \int_{2}^\infty \frac{\theta}{x^{z+1}} \dx \\
+ &=s \int_{1}^\infty \frac{\theta(x)}{x^{s+1}}\dx \stackrel{x=e^t}= s \int_0^\infty e^{-st} \theta(e^t) \dx[t].
+\end{align*}
+Sei $ f(t):= \theta(e^t) e^{-t} -1  $. $ f $ ist nach Lemma \ref{linear} beschränkt und messbar.
+Vermöge 
+\begin{align*}
+g(z)&:= \int_0^\infty (\theta(e^t)e^{-t}-1)e^{-zt}\dx[t]\\
+&= \underbrace{\int_{0}^\infty \theta(e^t) e^{-(z+1)t}}_{=\frac{\Phi(z+1)}{z+1}}- \underbrace{\int_0^\infty e^{-zt}\dx[t]}_{\frac{1}{z}}\\
+&= \frac{\Phi(z+1)-\frac{1}{z}}{z+1} + \underbrace{\frac{1}{z(z+1)}- \frac{1}{z}}_{=-\frac{1}{z+1}}.
+\end{align*}
+Damit ist $ g $ wohldefiniert und holomorph auf einer Obermenge von $ \{z\in \C: \Re(z)\ge 0\} $ nach Lemma \ref{hol}. Wir können also Satz \ref{ana} anwenden. Dann existiert
+\[
+\int_0^\infty (\theta(e^t) e^{-t}-1) \dx[t]\stackrel{x=e^t}= \int_1^\infty \frac{\theta(x) x^{-1} -1}{x}\dx= \int_1^\infty \frac{\theta(x)-x}{x^2}\dx.
+\]
+\end{proof}
+\begin{lem} \label{final}
+$ \theta(x)\sim x $.
+\end{lem}
+\begin{proof}
+Angenommen für ein $ \lambda>1 $ existiert hinreichend großes $ x $ mit $ \theta(x) \ge \lambda x $. Da $ \theta(x) $ offensichtlich monoton steigend folgt
+\[
+\int_x^{\lambda x} \frac{\theta(t)-t}{t^2} \dx[t] \ge \int_x^{\lambda x} \frac{\lambda x- t}{t^2} \dx[t]= \int_1^\lambda \frac{\lambda-t}{t^2} \dx[t] >0
+\]
+Und nach dem Cauchy-Kriterium divergiert das Integral $ \int_1^\infty \frac{\theta(t)-t}{t^2} \dx[t] $. Es ergibt sich der Widerspruch zu Lemma \ref{int} und es folgt $ \lim\sup_{x\to \infty} \frac{\theta(x)}{x}\le 1 $. Sehr ähnlich lässt sich zeigen, dass auch die Anname $ \theta(x)\le \lambda x $ mit $ \lambda < 1 $ für hinreichend große $ x $ zum Widerspruch führt, denn
+\[
+\int_{\lambda x}^x \frac{\theta(t)-t}{t^2}\dx[t] \le \int_{\lambda x}^x \frac{\lambda x-1}{t^2} \dx[t]=\int_{\lambda}^1 \frac{\lambda-t}{t^2}\dx[t]<0.
+\]
+Es folgt $ \lim\inf_{x\to \infty} \frac{\theta(x)}{x} \ge 1 $. Insgesamt folgt $ \lim_{x\to \infty} \frac{\theta(x)}{x} =1 $.
+\end{proof}
+Mit Lemma \ref{final} und Lemma \ref{equiv} folgt der Primzahlensatz.
+\newpage
+\section*{Verwendete Sätze}
+An dieser Stelle, die Formulierung einiger wichtiger Sätze. Sei stets $ \K \in \{\R, \C\} $.
+
+\begin{st*}[Cauchy-Integralkriterium]
+Es sei $ f $ eine monoton fallende Funktion, die auf dem Intervall $ [p, \infty) $ mit einer ganzen Zahl $ p $ definiert ist und nur positive Werte annimmt. Dann konvergiert die Reihe $ \sum_{n=p}^\infty f(n) $ genau dann, wenn das Integral $ \int_p^\infty f(x) \dx $ existiert. Es gelten die Abschätzungen
+\[
+\sum_{n=p+1}^\infty f(n) \le \int_p^\infty f(x) \dx \le \sum_{n=p}^\infty f(n).
+\]
+\end{st*}
+
+\begin{st*}[Residuumberechnung]
+Hat $ f $ in $ a $ eine Polstelle 1. Ordnung, gilt: 
+\[
+\Res_a(f)=\lim_{z\to a}(z-a) f(z)
+\]
+\end{st*}
+
+\begin{st*}[Binomischer Lehrsatz]
+Für alle $ x,y\in \K $ und für alle $ n\in \N $
+\[
+(x+y)^n= \sum_{k=0}^n \begin{pmatrix} n \\ k \end{pmatrix} x^{n-k} y^k,
+\]
+wobei $ \begin{psmallmatrix} n\\ k \end{psmallmatrix}= \frac{n!}{k! (n-k)!} $, der Binomialkoeffizient ist.
+\end{st*}
+
+\begin{st*}[Kompakte Konvergenz holomorpher Funktionen]
+Eine Folge von Funktionen $ (f_n), f_n: O \to \C $ heißt \emph{kompakt konvergent} gegen $ f $, falls für jede kompakte Teilmenge $ K\subset O $ die Funktion $ f_n|_K $ gleichmäßig gegen $ f|_K $ konvergiert. Ist  $ f_n $ holomorph und konvergiert $ f_n $ kompakt gegen $ f $, so ist $ f $ holomorph.
+\end{st*}
+
+\begin{st*}[Weierstraßscher M-Test]
+Ist $ \sum_{a_n} $ mit $ a_n \ge 0 $ konvergent und gilt $ f_n: M \to \C, |f_n(z)|\le a_n $ auf $ M\subset \C $, so ist die Reihe $ \sum_{n=0}^\infty f_n(z) $ gleichmäßig konvergent auf $ M $ und absolut konvergent für $ z\in M $.
+\end{st*}
+
+\begin{st*}[Riemannscher Hebbarkeitssatz]
+Sei $ O\subset \C $, $ z_0\in O $, $ f: O \setminus\{z_0\} \to \C $ differenzierbar, und
+\[
+\exists r>0 \exists M>0: |f(z)|\le M, \quad \text{ für } 0 <|z-z_0|<r
+\]
+Dann kann $ f $ in $ z=z_0 $ holomorph ergänzt werden.
+\end{st*}
+
+\begin{st*}[messbare beschränkte Funktionen sind integrierbar]
+Ist $ f $ messbar und Lebesgue-beschränkt, so ist $ f $ integrierbar.
+\end{st*}
+
+\begin{st*}[Cauchy-Integralformel]
+Sei $ G $ eine einfach zusammenhängendes Gebiet und $ \gamma $ ein stückweise stetig differenzierbarer, geschlossener und doppelpunktfreier Weg in $ G $, der im "`Gegenuhrzeigersinn"' orientiert ist. Weiter sei $ z $ im Inneren von $ \gamma $ und $ f $ holomorph auf $ G $. Dann gilt
+\[
+f(z)=\frac{1}{2\pi i} \int_\gamma \frac{f(\zeta)}{\zeta-z}\dx[\zeta].
+\]
+\end{st*}
+
+\begin{st*}[Cauchy-Kriterium für uneigentliche Integrale]
+Das uneigentliche Integral $ \int_r^\infty f(x) \dx $ ist genau dann konvergent, wenn
+\[
+\forall_{\eps>0}\exists_{c>0}\forall_{x', x''\ge c} \Bigg | \int_{x'}^{x''} f(x) \dx \Bigg | < \eps
+\]
+\end{st*}
+
+Die meisten anderen Sätze, die verwendet worden sind, sollten sich aus dem Kontext ergeben.
+
+\end{document}
