@@ -1,0 +1,17 @@
+# Temporary files
+*.swp
+*~
+
+# LaTeX build files
+*.pdf
+*.aux
+*.fdb_latexmk
+*.out
+*.thm
+*.toc
+*.fls
+*.log
+*dot2tex*.tex
+*dot2tex*.dot
+*.dvi
+*.synctex.gz
